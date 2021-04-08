@@ -39,3 +39,5 @@ registerAll registers all methods with @Listener attribute <br>
 
 ## Filters
 ![image](https://user-images.githubusercontent.com/47327665/114083350-856ecb80-98b7-11eb-98a7-f54dcf94766f.png)
+<br>
+if check returns true event will be filtered and method wont get called
