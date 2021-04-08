@@ -1,5 +1,5 @@
 # pisiEventAPI
-NOTE: this project requires Meowlib<br>
+NOTE: this project requires MeowLib<br>
 you can get it here: https://github.com/united-meows/MeowLib
 <br>
 ## Usage
