@@ -41,3 +41,9 @@ registerAll registers all methods with @Listener attribute <br>
 ![image](https://user-images.githubusercontent.com/47327665/114083350-856ecb80-98b7-11eb-98a7-f54dcf94766f.png)
 <br>
 if check returns true event will be filtered and method wont get called
+
+## Stopping an event from calling other listeners
+![image](https://user-images.githubusercontent.com/47327665/114084476-e34fe300-98b8-11eb-9beb-dad69bf20f92.png)
+<br>
+depends on priority, next listeners wont get that event
+
