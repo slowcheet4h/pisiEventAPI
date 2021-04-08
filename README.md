@@ -25,6 +25,8 @@ label: name of listener (only required for stopping/starting/pausing listener
 <br>
 weight: priority of listener  MASTER(10), HIGHEST(5) MEDIUM(3), LOW(2), LOWEST(1), SLAVE(-9), MONITOR(-10) (default: medium)
 <br>
+## Firing an event
+![image](https://user-images.githubusercontent.com/47327665/114085964-b8ff2500-98ba-11eb-8fb2-3d369a9beac8.png)
 
 ## Regitering Listeners
 <br>
