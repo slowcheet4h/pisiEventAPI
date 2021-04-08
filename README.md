@@ -9,7 +9,7 @@ you can get it here: https://github.com/united-meows/MeowLib
 <br>
 ## if you want to use async events<br>
 ![image](https://user-images.githubusercontent.com/47327665/114080809-7b979900-98b4-11eb-923d-4bcf3a3240c8.png)
-## NOTE: Async events can't get canceled
+## NOTE: Async events can't get canceled/stopped
 ## Creating a Event System and Registering Events
 ![image](https://user-images.githubusercontent.com/47327665/114081126-da5d1280-98b4-11eb-8a98-ea1631beffff.png)
 ## creating a Listener
