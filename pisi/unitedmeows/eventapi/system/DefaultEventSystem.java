@@ -1,7 +1,5 @@
 package pisi.unitedmeows.eventapi.system;
 
-
-
 import pisi.unitedmeows.eventapi.Listener;
 import pisi.unitedmeows.eventapi.etc.MethodWrapper;
 import pisi.unitedmeows.eventapi.etc.Tuple;
@@ -26,9 +24,8 @@ public abstract class DefaultEventSystem implements IEventSystem {
         }
     };
 
-    @Override
-    public void __setup() {
-       /* registeredEvents.put(TickEvent.class, new CopyOnWriteArrayList<>());*/
+
+    public DefaultEventSystem() {
         setup();
     }
 
@@ -86,14 +83,12 @@ public abstract class DefaultEventSystem implements IEventSystem {
                         async((u)-> {
                             try {
                                 wrapper.target.invoke(wrapper.source, event);
-                            } catch (Exception ex) {
-                            }
+                            } catch (Exception ex) { }
                         });
                     } else {
                         try {
                             wrapper.target.invoke(wrapper.source, event);
-                        } catch (IllegalAccessException | InvocationTargetException ex) {
-                        }
+                        } catch (IllegalAccessException | InvocationTargetException ex) { }
                     }
 
                     if (event.isStopped()) {
