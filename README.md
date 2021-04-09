@@ -1,6 +1,6 @@
 # pisiEventAPI
 NOTE: this project requires MeowLib<br>
-you can get it here: https://github.com/united-meows/MeowLib <br>
+you can get it here: https://github.com/united-meows/MeowLib <br> or 
 Direct Download: https://github.com/united-meows/MeowLib/releases/download/1/meowlib.jar
 <br>
 ## Usage
