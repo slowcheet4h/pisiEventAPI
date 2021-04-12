@@ -1,5 +1,5 @@
 # pisiEventAPI
-NOTE: this project requires MeowLib<br>
+NOTE: Async events requires MeowLib (only required if you are going to use AsyncEvents) <br>
 you can get it here: https://github.com/united-meows/MeowLib or<br>
 Direct Download: https://github.com/united-meows/MeowLib/releases/download/1/meowlib.jar
 <br>
@@ -8,7 +8,7 @@ Direct Download: https://github.com/united-meows/MeowLib/releases/download/1/meo
 ![image](https://user-images.githubusercontent.com/47327665/114080692-57d45300-98b4-11eb-8a09-b6732401278b.png)
 <br>
 <br>
-## if you want to use async events<br>
+## if you want to use async events (meowlib required) <br>
 ![image](https://user-images.githubusercontent.com/47327665/114080809-7b979900-98b4-11eb-923d-4bcf3a3240c8.png)
 ## NOTE: Async events can't get canceled/stopped
 ## Creating a Event System and Registering Events
