@@ -11,7 +11,6 @@ public interface IEventSystem {
     void unregisterAll(Object o);
     void registerAll(Object o);
     void fire(Event event);
-    void __setup();
     boolean setFilter(String listenerName, Class<? extends Event> event, Filter filter);
     void close();
 }

@@ -1,40 +1,30 @@
 package pisi.unitedmeows.eventapi.etc;
 
-
 import pisi.unitedmeows.eventapi.Listener;
+import pisi.unitedmeows.eventapi.event.Event;
 import pisi.unitedmeows.eventapi.filter.Filter;
 
 import java.lang.reflect.Method;
 
-public class MethodWrapper {
+public class MethodWrapper extends ActionWrapper
+{
 
-    public final Object source;
-    public final Listener listener;
-    public final Method target;
-    private Filter filter;
-    public boolean paused;
+    private Method method;
 
-    public MethodWrapper(Object _source, Method _target, Listener _listener, Filter _filter)
-    {
-        listener = _listener;
-        filter = _filter;
-        source = _source;
-        target = _target;
+    public MethodWrapper(Object o, Method method, Listener listener, Filter filter) {
+        super(o, listener.label(), listener.events(), listener.weight(), listener.autoRegister(), listener.ignoreCanceled()
+        , filter);
+        this.method = method;
     }
 
-    public boolean isPaused() {
-        return paused;
+    public Method getMethod() {
+        return method;
     }
 
-    public void setPaused(boolean paused) {
-        this.paused = paused;
-    }
-
-    public Filter getFilter() {
-        return filter;
-    }
-
-    public void setFilter(Filter filter) {
-        this.filter = filter;
+    @Override
+    public void run(Event event) {
+        try {
+            method.invoke(source(), event);
+        } catch (Exception ex) {}
     }
 }

@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Listener {
     public String label() default "empty_event";
-    public Class<? extends Event>[] events();
+    public Class<? extends Event>[] events() default {};
     public Event.Weight weight() default Event.Weight.MEDIUM;
     public boolean ignoreCanceled() default false;
     public boolean autoRegister() default true;
