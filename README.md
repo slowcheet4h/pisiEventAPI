@@ -53,7 +53,7 @@ depends on priority, next listeners wont get that event
 ## on method
 ![image](https://user-images.githubusercontent.com/47327665/115071038-677c1900-9efe-11eb-9bc5-71ccf33a0056.png)
 <br>
-acts just like listener method <br>
+acts just like listener method (You may cast the event variable & multiple events supported)<br>
 ![image](https://user-images.githubusercontent.com/47327665/115071255-b1fd9580-9efe-11eb-8cef-8066382e54a1.png)<br>
 unregistering on listener <br>
 
