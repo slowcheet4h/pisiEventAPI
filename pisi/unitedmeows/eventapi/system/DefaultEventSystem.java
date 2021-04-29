@@ -55,7 +55,7 @@ public abstract class DefaultEventSystem implements IEventSystem {
             Listener listener = method.getAnnotation(Listener.class);
             if (listener != null) {
                 if (listener.autoRegister()) {
-                    MethodWrapper wrapper = new MethodWrapper(o, method, listener, NO_FILTER);
+                    MethodWrapper wrapper = new MethodWrapper(o, method, listener, null);
                     if (listener.events().length > 0) {
                         for (Class<? extends Event> eventType : listener.events()) {
                             registeredEvents.get(eventType).add(wrapper);
@@ -99,12 +99,21 @@ public abstract class DefaultEventSystem implements IEventSystem {
                 }
 
 
-                if (wrapper.getFilter() == NO_FILTER || !wrapper.getFilter().check(event)) {
+                if (wrapper.getFilter() == null || wrapper.getFilter() == NO_FILTER || !wrapper.getFilter().check(event)) {
 
-                    if (event.isAsync()) {
-                        async((u)-> wrapper.run(event));
-                    } else {
-                        wrapper.run(event);
+                    switch (event.getType()) {
+                        case SYNC: {
+                            wrapper.run(event);
+                            break;
+                        }
+                        case ASYNC: {
+                            async((u) -> wrapper.run(event));
+                            break;
+                        }
+                        case AWAIT_ASYNC: {
+                            await(async((u) -> wrapper.run(event)));
+                            break;
+                        }
                     }
 
                     if (event.isStopped()) {
@@ -178,11 +187,11 @@ public abstract class DefaultEventSystem implements IEventSystem {
     }
 
     public void on(IActionWrapper<Event> action, Class<? extends Event> _event) {
-        on(action, _event, NO_FILTER, "empty_on");
+        on(action, _event, null, "empty_on");
     }
 
     public void on(IActionWrapper<Event> action, Class<? extends Event> _event, String _label) {
-        on(action, _event, NO_FILTER, _label);
+        on(action, _event, null, _label);
     }
 
     public void on(IActionWrapper<Event> action, Class<? extends Event> _events[], Filter<?> filter) {
@@ -190,17 +199,17 @@ public abstract class DefaultEventSystem implements IEventSystem {
     }
 
     public void on(IActionWrapper<Event> action, Class<? extends Event> _events[]) {
-        on(action, _events, NO_FILTER, "empty_on");
+        on(action, _events, null, "empty_on");
     }
     public void on(IActionWrapper<Event> action, Class<? extends Event> _events[], final String _label) {
-        on(action, _events, NO_FILTER, _label);
+        on(action, _events, null, _label);
     }
 
 
 
     @Override
     public void register(Object source, String label) {
-        register(source, NO_FILTER, label);
+        register(source, null, label);
     }
 
     public void register(Object source, Filter filter, String label) {

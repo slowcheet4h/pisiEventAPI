@@ -3,14 +3,20 @@ package pisi.unitedmeows.eventapi.event;
 
 public class Event {
 
-    private boolean async;
     private boolean canceled;
+    protected Type type = Type.SYNC;
     private boolean stopped;
 
     public enum Time {
         BEFORE,
         ON,
         AFTER
+    }
+
+    public enum Type {
+        ASYNC,
+        SYNC,
+        AWAIT_ASYNC,
     }
 
     public enum Weight {
@@ -32,6 +38,14 @@ public class Event {
         }
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public void setCanceled(boolean canceled) {
         this.canceled = canceled;
     }
@@ -40,16 +54,9 @@ public class Event {
         return canceled;
     }
 
-    public boolean isAsync() {
-        return async;
-    }
 
     public void stop() {
         stopped = true;
-    }
-
-    public void setAsync(boolean async) {
-        this.async = async;
     }
 
     public boolean isStopped() {
