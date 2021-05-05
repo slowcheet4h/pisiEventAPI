@@ -52,6 +52,9 @@ public abstract class DefaultEventSystem implements IEventSystem {
 
     public void registerAll(Object o) {
         for (Method method : o.getClass().getDeclaredMethods()) {
+            if (!method.isAccessible()) {
+                method.setAccessible(true); // thanks to ipana for this bug fix
+            }
             Listener listener = method.getAnnotation(Listener.class);
             if (listener != null) {
                 if (listener.autoRegister()) {
@@ -89,6 +92,93 @@ public abstract class DefaultEventSystem implements IEventSystem {
         }
     }
 
+
+    public void setPaused(Object instance, String listenerName, boolean state) {
+        for (CopyOnWriteArrayList<ActionWrapper> value : registeredEvents.values()) {
+            for (ActionWrapper actionWrapper : value) {
+                if (actionWrapper.source() == instance && actionWrapper.label.equalsIgnoreCase(listenerName)) {
+                    actionWrapper.setPaused(state);
+                }
+            }
+        }
+    }
+    public void setPaused(String listenerName, boolean state) {
+        for (CopyOnWriteArrayList<ActionWrapper> value : registeredEvents.values()) {
+            for (ActionWrapper actionWrapper : value) {
+                if (actionWrapper.label.equalsIgnoreCase(listenerName)) {
+                    actionWrapper.setPaused(state);
+                }
+            }
+        }
+    }
+
+    /** requires meowlib
+     * sets pause state to 'state' arg for 'time'
+     * then sets back old value
+     * **/
+    public void setPauseStateFor(Object instance, String listenerName, boolean state, long time) {
+        HashMap<ActionWrapper, Boolean> states = new HashMap<>();
+        for (CopyOnWriteArrayList<ActionWrapper> value : registeredEvents.values()) {
+            for (ActionWrapper actionWrapper : value) {
+                if (actionWrapper.source() == instance && actionWrapper.label.equalsIgnoreCase(listenerName)) {
+                    states.put(actionWrapper, actionWrapper.isPaused());
+                    actionWrapper.setPaused(state);
+                }
+            }
+        }
+
+        async_w(u -> {
+            states.forEach((actionWrapper, oldState) -> actionWrapper.setPaused(oldState.booleanValue()));
+        }, time);
+    }
+
+    /** requires meowlib
+     * sets pause state to 'state' arg for 'time'
+     * then sets back old value
+     * (no instance check (if there is multiple instances of same listener all would be affected))
+     * **/
+    public void setPauseStateFor(String listenerName, boolean state, long time) {
+        HashMap<ActionWrapper, Boolean> states = new HashMap<>();
+        for (CopyOnWriteArrayList<ActionWrapper> value : registeredEvents.values()) {
+            for (ActionWrapper actionWrapper : value) {
+                if (actionWrapper.label.equalsIgnoreCase(listenerName)) {
+                    states.put(actionWrapper, actionWrapper.isPaused());
+                    actionWrapper.setPaused(state);
+                }
+            }
+        }
+
+        async_w(u -> {
+            states.forEach((actionWrapper, oldState) -> actionWrapper.setPaused(oldState.booleanValue()));
+        }, time);
+    }
+
+    public void setPausedFor(String listenerName, long time) {
+       setPaused(listenerName, true);
+        async_w((u-> {
+            setPaused(listenerName, false);
+        }), time);
+    }
+
+    public void setPausedFor(Object instance, String listenerName, long time) {
+       setPaused(instance, listenerName, true);
+        async_w((u-> {
+            setPaused(instance, listenerName, false);
+        }), time);
+    }
+    public void setEnabledFor(String listenerName, long time) {
+       setPaused(listenerName, false);
+        async_w((u-> {
+            setPaused(listenerName, true);
+        }), time);
+    }
+
+    public void setEnabledFor(Object instance, String listenerName, long time) {
+       setPaused(instance, listenerName, false);
+        async_w((u-> {
+            setPaused(instance, listenerName, true);
+        }), time);
+    }
 
     public void fire(Event event) {
         for (ActionWrapper wrapper : registeredEvents.get(event.getClass())) {
