@@ -1,7 +1,6 @@
 # pisiEventAPI
 NOTE: Async events requires MeowLib (only required if you are going to use AsyncEvents) <br>
 you can get it here: https://github.com/united-meows/MeowLib or<br>
-Direct Download: https://github.com/united-meows/MeowLib/releases/download/1/meowlib.jar
 <br>
 ## Usage
 # example event class<br>
