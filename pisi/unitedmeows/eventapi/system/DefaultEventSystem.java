@@ -19,13 +19,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class DefaultEventSystem implements IEventSystem {
 
-    public static Filter NO_FILTER = new Filter() {
-        @Override
-        public boolean check(Object event) {
-            return false;
-        }
-    };
-
 
     public DefaultEventSystem() {
         setup();
@@ -189,7 +182,7 @@ public abstract class DefaultEventSystem implements IEventSystem {
                 }
 
 
-                if (wrapper.getFilter() == null || wrapper.getFilter() == NO_FILTER || !wrapper.getFilter().check(event)) {
+                if (wrapper.getFilter() == null || !wrapper.getFilter().check(event)) {
 
                     switch (event.getType()) {
                         case SYNC: {
