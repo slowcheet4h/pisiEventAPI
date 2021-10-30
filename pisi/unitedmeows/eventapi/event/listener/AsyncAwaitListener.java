@@ -14,15 +14,15 @@ public class AsyncAwaitListener<X extends Event> extends Listener<X> {
 
 	@Override
 	public void call(Event event) {
-
-		if (filters.length != 0) {
-			for (Predicate<X> predicate : filters) {
-				if (!predicate.test((X) event)) {
-					return;
+		if (preCheck(event)) {
+			if (filters.length != 0) {
+				for (Predicate<X> predicate : filters) {
+					if (!predicate.test((X) event)) {
+						return;
+					}
 				}
 			}
-		}
-		if (preCheck(event)) {
+
 			pisi.unitedmeows.meowlib.async.Async.await(pisi.unitedmeows.meowlib.async.Async.async(f -> {
 				this.function.call((X) event);
 			}));

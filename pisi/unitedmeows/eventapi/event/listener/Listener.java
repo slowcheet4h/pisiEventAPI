@@ -32,6 +32,8 @@ public class Listener<X extends Event> {
 
 	private Object declaredObject;
 	protected static volatile Random random = new Random();
+	private boolean paused;
+
 
 	public Listener(IFunction<X> event, Predicate<X>... filters) {
 		this.function = event;
@@ -79,21 +81,22 @@ public class Listener<X extends Event> {
 	}
 
 	public void call(Event event) {
-
-		if (filters.length != 0) {
-			for (Predicate<X> predicate : filters) {
-				if (!predicate.test((X) event)) {
-					return;
+		if (preCheck(event)) {
+			if (filters.length != 0) {
+				for (Predicate<X> predicate : filters) {
+					if (!predicate.test((X) event)) {
+						return;
+					}
 				}
 			}
-		}
-		if (preCheck(event)) {
+
 			this.function.call((X) event);
 		}
 	}
 
+
 	public boolean preCheck(Event event) {
-		return !ignoreCanceled || !event.isCanceled();
+		return (!ignoreCanceled || !event.isCanceled()) && !paused;
 	}
 
 	public Object declared() { return declaredObject; }
@@ -112,6 +115,22 @@ public class Listener<X extends Event> {
 		if (remove) {
 			listeningEvents.remove(i);
 		}
+	}
+
+	public void setPaused(boolean state) {
+		paused = state;
+	}
+
+	public void pause() {
+		paused = true;
+	}
+
+	public void resume() {
+		paused = false;
+	}
+
+	public boolean paused() {
+		return paused;
 	}
 
 	public boolean ignoreCanceled() {

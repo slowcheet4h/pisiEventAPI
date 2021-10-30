@@ -15,26 +15,25 @@ public class ThreadListener<X extends Event> extends Listener<X> {
 
 	@Override
 	public void call(Event event) {
-		if (filters.length != 0) {
-			for (Predicate<X> predicate : filters) {
-				if (!predicate.test((X) event)) {
-					return;
+		if (preCheck(event)) {
+			if (filters.length != 0) {
+				for (Predicate<X> predicate : filters) {
+					if (!predicate.test((X) event)) {
+						return;
+					}
 				}
 			}
+
+
+			thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					function.call((X) event);
+				}
+			});
+
+
+			thread.start();
 		}
-
-		if (!preCheck(event)) {
-			return;
-		}
-
-		thread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				function.call((X) event);
-			}
-		});
-
-
-		thread.start();
 	}
 }

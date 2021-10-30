@@ -11,7 +11,6 @@ public class Event {
 		AFTER
 	}
 
-
 	public enum Weight {
 		MASTER(10),
 		HIGHEST(5),
@@ -30,6 +29,7 @@ public class Event {
 			return weight;
 		}
 	}
+	
 	public void setCanceled(boolean canceled) {
 		this.canceled = canceled;
 	}
