@@ -15,6 +15,11 @@ you can get it here: https://github.com/united-meows/MeowLib<br>
 ![Screenshot_20211030_185923](https://user-images.githubusercontent.com/47327665/139541276-0894023d-1684-425a-b13d-5128b7254352.png)
 <br>
 <br>
+# !! NOTE: for users using java version 8 or less<br>
+Avoid using lambdas or it'll make classes load slowly (90-200ms per class)<br>
+![java18](https://user-images.githubusercontent.com/47327665/139541933-045629c9-2421-456b-afe6-fcd93b97c436.png)
+<br>
+<i>Use anonymous calls instead</i>
 ## listener settings<br>
 ![Screenshot_20211030_191114](https://user-images.githubusercontent.com/47327665/139541285-a8e5c558-18f2-4d57-975f-b73db31f2991.png)
 <br>
