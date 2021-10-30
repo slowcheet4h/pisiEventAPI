@@ -1,59 +1,33 @@
 # pisiEventAPI
-NOTE: Async events requires MeowLib (only required if you are going to use AsyncEvents) <br>
+NOTE: Async listeners requires MeowLib (only required if you are going to use Async) <br>
 you can get it here: https://github.com/united-meows/MeowLib<br>
 <br>
 ## Usage
-# example event class<br>
-![image](https://user-images.githubusercontent.com/47327665/114080692-57d45300-98b4-11eb-8a09-b6732401278b.png)
+## example event class<br>
+![testEvent](https://user-images.githubusercontent.com/47327665/139541443-bf792201-201d-4230-9be1-21933e9269b8.png)
 <br>
 <br>
-## if you want to use async events (meowlib required) <br>
-![image](https://user-images.githubusercontent.com/47327665/114080809-7b979900-98b4-11eb-923d-4bcf3a3240c8.png)
-## NOTE: Async events can't get canceled/stopped
-## Creating a Event System and Registering Events
-![image](https://user-images.githubusercontent.com/47327665/114081126-da5d1280-98b4-11eb-8a98-ea1631beffff.png)
-## creating a Listener
-![image](https://user-images.githubusercontent.com/47327665/114081768-a3d3c780-98b5-11eb-8c61-47abfba37ac6.png)
+## creating a event manager<br>
+![Screenshot_20211030_185957](https://user-images.githubusercontent.com/47327665/139541261-91694ac7-b982-42ff-b369-30480598c987.png)
 <br>
-events(*): the events that listener listens (multiple event support)
 <br>
-ignoreCanceled: if event is canceled before, the method wont get called (default: false)
+## creating a listener<br>
+![Screenshot_20211030_185923](https://user-images.githubusercontent.com/47327665/139541276-0894023d-1684-425a-b13d-5128b7254352.png)
 <br>
-autoregister: should "registerAll" method register the listener (default: true) (you can register manually with eventSystem.register( )
 <br>
-label: name of listener (only required for stopping/starting/pausing listener
+## listener settings<br>
+![Screenshot_20211030_191114](https://user-images.githubusercontent.com/47327665/139541285-a8e5c558-18f2-4d57-975f-b73db31f2991.png)
 <br>
-weight: priority of listener  MASTER(10), HIGHEST(5) MEDIUM(3), LOW(2), LOWEST(1), SLAVE(-9), MONITOR(-10) (default: medium)
 <br>
-## Firing an event
-![image](https://user-images.githubusercontent.com/47327665/114085964-b8ff2500-98ba-11eb-8fb2-3d369a9beac8.png)
-
-## Regitering Listeners
+## asynclistener and custom listeners<br>
+![Screenshot_20211030_190409](https://user-images.githubusercontent.com/47327665/139541312-69e9b9b8-fe69-44df-8d12-a59ed4d1fecc.png)
 <br>
-registerAll registers all methods with @Listener attribute <br>
-
-```java
-    eventSystem.registerAll(listenerClass); // registers all listeners in a class
-    // or you can register manually
-    eventSystem.register(listenerClass, "test_listener"); // listener should have a label
-```
+<i>Async listeners can't cancel or stop events and editing an event wont make difference (since its async)</i>
 <br>
-
-## Filters
-![image](https://user-images.githubusercontent.com/47327665/114083350-856ecb80-98b7-11eb-98a7-f54dcf94766f.png)
 <br>
-if check returns true event will be filtered and method wont get called
-
-## Stopping an event from calling other listeners
-![image](https://user-images.githubusercontent.com/47327665/114084476-e34fe300-98b8-11eb-9beb-dad69bf20f92.png)
+## registering listeners<br>
+![Screenshot_20211030_190215](https://user-images.githubusercontent.com/47327665/139541767-3c6e526b-fb40-4f57-80a0-86a609ac367b.png)
 <br>
-depends on priority, next listeners wont get that event
-
-## on method
-![image](https://user-images.githubusercontent.com/47327665/115071038-677c1900-9efe-11eb-9bc5-71ccf33a0056.png)
 <br>
-acts just like listener method (You may cast the event variable & multiple events supported)<br>
-![image](https://user-images.githubusercontent.com/47327665/115071255-b1fd9580-9efe-11eb-8cef-8066382e54a1.png)<br>
-unregistering on listener <br>
-
-
+## unregistering listeners<br>
+![Screenshot_20211030_190306](https://user-images.githubusercontent.com/47327665/139541781-091320d7-1647-44ec-a422-aec6f5564a52.png)
