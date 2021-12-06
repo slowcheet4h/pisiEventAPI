@@ -12,20 +12,20 @@ you can get it here: https://github.com/united-meows/MeowLib<br>
 <br>
 <br>
 ## creating a listener<br>
-![Screenshot_20211030_185923](https://user-images.githubusercontent.com/47327665/139541276-0894023d-1684-425a-b13d-5128b7254352.png)
+![listener](https://user-images.githubusercontent.com/47327665/144812588-212908f1-7cfe-4e99-8ff5-eb2570731f29.png)
 <br>
 <br>
 # !! NOTE: for users using java version 8 or less<br>
 Avoid using lambdas or it'll make classes load slowly (90-200ms per class)<br>
-![java18](https://user-images.githubusercontent.com/47327665/139541933-045629c9-2421-456b-afe6-fcd93b97c436.png)
+![java18](https://user-images.githubusercontent.com/47327665/144812651-f21e81bf-e737-4fb3-8587-1019f87b5bb3.png)
 <br>
 <i>Use anonymous calls instead</i>
 ## listener settings<br>
-![Screenshot_20211030_191114](https://user-images.githubusercontent.com/47327665/139541285-a8e5c558-18f2-4d57-975f-b73db31f2991.png)
+![weight](https://user-images.githubusercontent.com/47327665/144812731-7beaafa3-70c7-4e5e-a374-77241d6901c0.png)
 <br>
 <br>
 ## asynclistener and custom listeners<br>
-![Screenshot_20211030_190409](https://user-images.githubusercontent.com/47327665/139541312-69e9b9b8-fe69-44df-8d12-a59ed4d1fecc.png)
+![asynclistener](https://user-images.githubusercontent.com/47327665/144812858-7757efd5-ebab-4283-8555-f6c87cee2c58.png)
 <br>
 <i>Async listeners can't cancel or stop events and editing an event wont make difference (since its async)</i>
 <br>
