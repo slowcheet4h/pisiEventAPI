@@ -8,21 +8,17 @@ import pisi.unitedmeows.eventapi.event.utils.TypeResolver;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class Listener<X extends Event> {
 
-	protected Predicate<X>[] filters;
+	protected ArrayList<Predicate<X>> filters;
 
 	protected IFunction<X> function;
 
 	protected List<Class<X>> listeningEvents;
 
-	protected UUID uuid;
 
 	protected boolean ignoreCanceled;
 	protected Event.Weight weight;
@@ -31,19 +27,16 @@ public class Listener<X extends Event> {
 	private Class<X> target;
 
 	private Object declaredObject;
-	protected static volatile Random random = new Random();
 	private boolean paused;
 
 
-	public Listener(IFunction<X> event, Predicate<X>... filters) {
+	public Listener(IFunction<X> event) {
 		this.function = event;
-		this.filters = filters;
+		this.filters = new ArrayList<>(1);
 		listeningEvents = new ArrayList<>(1);
 
 		this.target = (Class<X>) TypeResolver.resolveRawArgument(IFunction.class, function.getClass());
 		listen(target);
-
-		uuid = new UUID(random.nextLong(), random.nextLong());
 
 	}
 
@@ -68,21 +61,13 @@ public class Listener<X extends Event> {
 		listeningEvents.add(event);
 	}
 
-	public void __setup(Object _declaredObject, Class<? extends Event>[] _listeningEvents, Event.Weight _weight, boolean _ignoreCanceled) {
-		if (_listeningEvents.length != 0) {
-			listeningEvents.clear();
-			for (Class<? extends Event> event : _listeningEvents) {
-				listeningEvents.add((Class<X>) event);
-			}
-		}
+	public void __setup(Object _declaredObject) {
 		declaredObject = _declaredObject;
-		weight = _weight;
-		ignoreCanceled = _ignoreCanceled;
 	}
 
 	public void call(Event event) {
 		if (preCheck(event)) {
-			if (filters.length != 0) {
+			if (!filters.isEmpty()) {
 				for (Predicate<X> predicate : filters) {
 					if (!predicate.test((X) event)) {
 						return;
@@ -121,19 +106,21 @@ public class Listener<X extends Event> {
 		paused = state;
 	}
 
-	public void pause() {
+	public Listener<X> pause() {
 		paused = true;
+		return this;
 	}
 
-	public void resume() {
+	public Listener<X> resume() {
 		paused = false;
+		return this;
 	}
 
 	public boolean paused() {
 		return paused;
 	}
 
-	public boolean ignoreCanceled() {
+	public boolean isIgnoreCanceled() {
 		return ignoreCanceled;
 	}
 
@@ -145,16 +132,39 @@ public class Listener<X extends Event> {
 		return function;
 	}
 
-	public Predicate<X>[] filters() {
+	public ArrayList<Predicate<X>> filters() {
 		return filters;
 	}
 
-
-	public UUID uuid() {
-		return uuid;
+	public Listener<X> filter(Predicate<X> filter) {
+		filters.add(filter);
+		return this;
 	}
 
-	public Event.Weight weight() {
+	public Listener<X> weight(Event.Weight weight) {
+		this.weight = weight;
+		return this;
+	}
+
+	public Listener<X> listen(Class<X>... events) {
+		listeningEvents.addAll(Arrays.asList(events));
+		return this;
+	}
+
+	public Listener<X> ignoreCanceled() {
+		ignoreCanceled = true;
+		return this;
+	}
+
+	public Listener<X> ignoreCanceled(boolean state) {
+		ignoreCanceled = state;
+		return this;
+	}
+
+
+
+
+	public Event.Weight getWeight() {
 		return weight;
 	}
 }

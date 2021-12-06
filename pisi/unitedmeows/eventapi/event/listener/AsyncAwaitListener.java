@@ -9,13 +9,16 @@ import java.util.function.Predicate;
 public class AsyncAwaitListener<X extends Event> extends Listener<X> {
 
 	public AsyncAwaitListener(IFunction<X> event, Predicate<X>... filters) {
-		super(event, filters);
+		super(event);
+		for (Predicate<X> _filter : filters) {
+			filter(_filter);
+		}
 	}
 
 	@Override
 	public void call(Event event) {
 		if (preCheck(event)) {
-			if (filters.length != 0) {
+			if (!filters.isEmpty()) {
 				for (Predicate<X> predicate : filters) {
 					if (!predicate.test((X) event)) {
 						return;

@@ -1,2 +1,6 @@
-package test;public class PisiTestEvent {
+package test;
+
+import pisi.unitedmeows.eventapi.event.Event;
+
+public class PisiTestEvent extends Event {
 }
