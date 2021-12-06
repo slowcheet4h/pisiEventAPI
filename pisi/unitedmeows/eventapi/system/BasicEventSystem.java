@@ -100,16 +100,18 @@ public class BasicEventSystem implements IEventSystem
 
 			} else {
 				ArrayList<Listener<?>> listeners = _LISTENERS.get(listeningEvent);
-				listeners.add(listener);
-				try {
-					listeners.sort(new Comparator<Listener>() {
-						@Override
-						public int compare(Listener o1, Listener o2) {
-							return Integer.compare(o2.getWeight().value(), o1.getWeight().value());
-						}
-					});
-				} catch (ConcurrentModificationException ex) {
+				if (listeners != null) {
+					listeners.add(listener);
+					try {
+						listeners.sort(new Comparator<Listener>() {
+							@Override
+							public int compare(Listener o1, Listener o2) {
+								return Integer.compare(o2.getWeight().value(), o1.getWeight().value());
+							}
+						});
+					} catch (ConcurrentModificationException ex) {
 
+					}
 				}
 			}
 		}

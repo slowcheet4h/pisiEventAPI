@@ -14,13 +14,19 @@ public class PisiTest {
 	public static BasicEventSystem basicEventSystem = new BasicEventSystem();
 
 	public Listener<PisiTestEvent> listener = new Listener<PisiTestEvent>(event -> {
+		/* do something */
+	});
 
-	}).ignoreCanceled().weight(Event.Weight.HIGHEST);
+
+
 
 
 	public Listener<PisiTestEvent> listener2 = new Listener<PisiTestEvent>(event -> {
 
 	}).ignoreCanceled().weight(Event.Weight.MEDIUM);
+
+
+
 
 	public static void main(String[] args) {
 		PisiTest pisiTest = new PisiTest();

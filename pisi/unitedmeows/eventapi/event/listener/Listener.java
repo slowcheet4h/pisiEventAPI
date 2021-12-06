@@ -34,7 +34,7 @@ public class Listener<X extends Event> {
 		this.function = event;
 		this.filters = new ArrayList<>(1);
 		listeningEvents = new ArrayList<>(1);
-
+		weight = Event.Weight.MEDIUM;
 		this.target = (Class<X>) TypeResolver.resolveRawArgument(IFunction.class, function.getClass());
 		listen(target);
 
