@@ -36,3 +36,8 @@ Avoid using lambdas or it'll make classes load slowly (90-200ms per class)<br>
 <br>
 ## unregistering listeners<br>
 ![Screenshot_20211030_190306](https://user-images.githubusercontent.com/47327665/139541781-091320d7-1647-44ec-a422-aec6f5564a52.png)
+<br>
+<br>
+<br>
+Credits
+<h3>! This event api contains features from Brady's event api</h3>
