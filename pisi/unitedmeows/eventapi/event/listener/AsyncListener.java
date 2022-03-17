@@ -5,7 +5,7 @@ import pisi.unitedmeows.eventapi.event.IFunction;
 
 
 import java.util.function.Predicate;
-
+/* Delete this class if you don't need async listeners */
 public class AsyncListener<X extends Event> extends Listener<X> {
 
 	public AsyncListener(IFunction<X> event, Predicate<X>... filters) {
