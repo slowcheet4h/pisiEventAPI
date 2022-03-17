@@ -26,7 +26,7 @@ public class AsyncListener<X extends Event> extends Listener<X> {
 				}
 			}
 
-			pisi.unitedmeows.meowlib.async.Async.async(f -> {
+			pisi.unitedmeows.yystal.parallel.Async.async(() -> {
 				this.function.call((X) event);
 			});
 		}

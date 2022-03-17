@@ -1,13 +1,10 @@
 package test;
 
 import pisi.unitedmeows.eventapi.event.Event;
-import pisi.unitedmeows.eventapi.event.IFunction;
 import pisi.unitedmeows.eventapi.event.listener.Listener;
 import pisi.unitedmeows.eventapi.system.BasicEventSystem;
-import pisi.unitedmeows.meowlib.async.Async;
-import pisi.unitedmeows.meowlib.thread.kThread;
 
-import java.util.Random;
+import java.util.HashMap;
 
 public class PisiTest {
 
@@ -35,6 +32,7 @@ public class PisiTest {
 		for (int i = 1000000; i > 0; i--) {
 			basicEventSystem.fire(new PisiTestEvent());
 		}
+		System.out.print("1M call took ");
 		stopWatcher();
 
 	}
@@ -47,7 +45,7 @@ public class PisiTest {
 
 	public static void stopWatcher() {
 		long lastTime = System.currentTimeMillis();
-		System.out.println(lastTime - time + " ms took");
+		System.out.println(lastTime - time + "ms");
 	}
 
 }
