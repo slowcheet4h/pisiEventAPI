@@ -1,7 +1,6 @@
 # pisiEventAPI
-NOTE: Async listeners requires MeowLib (only required if you are going to use Async) <br>
-you can get it here: https://github.com/united-meows/MeowLib<br>
-<br>
+NOTE: Async listeners requires yystal (only required if you are going to use Async (AsyncListener<>) <br>
+you can get it here: https://github.com/united-meows/yystal<br>
 ## Usage
 ## example event class<br>
 ![testEvent](https://user-images.githubusercontent.com/47327665/139541443-bf792201-201d-4230-9be1-21933e9269b8.png)
@@ -41,3 +40,5 @@ Avoid using lambdas or it'll make classes load slowly (90-200ms per class)<br>
 <br>
 Credits
 <h3>! This event api contains features from Brady's event api</h3>
+
+<br>
