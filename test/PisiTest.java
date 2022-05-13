@@ -12,7 +12,8 @@ public class PisiTest {
 
 	public Listener<PisiTestEvent> listener = new Listener<PisiTestEvent>(event -> {
 		/* do something */
-	});
+		System.out.println("test");
+	}).listen(PisiTestEvent2.class, PisiTestEvent.class);
 
 
 
@@ -29,9 +30,10 @@ public class PisiTest {
 		PisiTest pisiTest = new PisiTest();
 		basicEventSystem.subscribeAll(pisiTest);
 		startWatcher();
-		for (int i = 1000000; i > 0; i--) {
-			basicEventSystem.fire(new PisiTestEvent());
+		for (int i = 5; i > 0; i--) {
+			basicEventSystem.fire(new PisiTestEvent2());
 		}
+		basicEventSystem.fire(new PisiTestEvent());
 		System.out.print("1M call took ");
 		stopWatcher();
 

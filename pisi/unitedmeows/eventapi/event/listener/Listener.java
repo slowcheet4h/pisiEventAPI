@@ -17,7 +17,7 @@ public class Listener<X extends Event> {
 
 	protected IFunction<X> function;
 
-	protected List<Class<X>> listeningEvents;
+	protected List<Class<?>> listeningEvents;
 
 
 	protected boolean ignoreCanceled;
@@ -56,11 +56,6 @@ public class Listener<X extends Event> {
 		return ((ParameterizedType) type).getActualTypeArguments()[index];
 	}
 
-
-	public void listen(Class<X> event) {
-		listeningEvents.add(event);
-	}
-
 	public void __setup(Object _declaredObject) {
 		declaredObject = _declaredObject;
 	}
@@ -89,7 +84,7 @@ public class Listener<X extends Event> {
 	public void stopListening(Class<?> event) {
 		int i = 0;
 		boolean remove = false;
-		for (Class<X> listeningEvent : listeningEvents) {
+		for (Class<?> listeningEvent : listeningEvents) {
 			if (listeningEvent == event) {
 				remove = true;
 				break;
@@ -124,7 +119,7 @@ public class Listener<X extends Event> {
 		return ignoreCanceled;
 	}
 
-	public List<Class<X>> listeningEvents() {
+	public List<Class<?>> listeningEvents() {
 		return listeningEvents;
 	}
 
@@ -146,7 +141,7 @@ public class Listener<X extends Event> {
 		return this;
 	}
 
-	public Listener<X> listen(Class<X>... events) {
+	public Listener<X> listen(Class<?>... events) {
 		listeningEvents.addAll(Arrays.asList(events));
 		return this;
 	}
